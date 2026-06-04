@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我 - 小秦的个人博客</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%); }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .particle { position: absolute; width: 2px; height: 2px; background: #00ffff; border-radius: 50%; animation: float 15s infinite; opacity: 0.5; }
+        @keyframes float { 0%, 100% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translateY(-100vh); opacity: 0; } }
+        nav { position: fixed; top: 0; width: 100%; padding: 15px 50px; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 255, 255, 0.1); z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00ffff, #0080ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #888; text-decoration: none; transition: all 0.3s; font-size: 14px; }
+        .nav-links a:hover { color: #00ffff; }
+        .container { max-width: 800px; margin: 0 auto; padding: 100px 20px 50px; }
+        h1 { font-size: 32px; color: #00ffff; margin-bottom: 20px; text-align: center; }
+        .副标题 { text-align: center; color: #888; font-size: 16px; margin-bottom: 50px; }
+        .联系网格 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .联系卡片 { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 255, 0.15); border-radius: 15px; padding: 35px 25px; text-align: center; transition: all 0.3s; }
+        .联系卡片:hover { transform: translateY(-8px); border-color: rgba(0, 255, 255, 0.4); box-shadow: 0 15px 50px rgba(0, 255, 255, 0.15); }
+        .联系卡片 .图标 { font-size: 45px; margin-bottom: 18px; display: block; }
+        .联系卡片 .标签 { color: #888; font-size: 13px; margin-bottom: 8px; }
+        .联系卡片 .值 { color: #e0e0e0; font-size: 16px; word-break: break-all; }
+        .联系卡片 .值 a { color: #00ffff; text-decoration: none; }
+        .联系卡片 .值 a:hover { text-decoration: underline; }
+        .社交区域 { text-align: center; margin-top: 50px; }
+        .社交区域 h2 { color: #00ffff; font-size: 22px; margin-bottom: 25px; }
+        .社交链接 { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .社交按钮 { display: inline-flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 255, 0.2); padding: 12px 25px; border-radius: 30px; color: #e0e0e0; text-decoration: none; transition: all 0.3s; font-size: 14px; }
+        .社交按钮:hover { background: rgba(0, 255, 255, 0.1); border-color: #00ffff; transform: translateY(-3px); }
+        .社交按钮 .btn图标 { font-size: 20px; }
+        .留言提示 { text-align: center; margin-top: 50px; padding: 30px; background: rgba(0, 255, 255, 0.05); border-radius: 15px; border: 1px solid rgba(0, 255, 255, 0.1); }
+        .留言提示 p { color: #888; font-size: 14px; margin-bottom: 15px; }
+        .留言提示 a { color: #00ffff; text-decoration: none; font-weight: bold; }
+        .留言提示 a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid rgba(0, 255, 255, 0.1); color: #666; font-size: 13px; }
+        @media (max-width: 768px) { nav { padding: 12px 20px; } .container { padding: 100px 15px 30px; } .联系网格 { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+    <nav>
+        <div class="logo">小秦</div>
+        <div class="nav-links">
+            <a href="index.html">首页</a>
+            <a href="blog.html">博客</a>
+            <a href="projects.html">项目</a>
+            <a href="message.html">留言</a>
+            <a href="contact.html">联系</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>📮 联系我</h1>
+        <p class="副标题">随时欢迎与我交流，期待你的消息！</p>
+        <div class="联系网格">
+            <div class="联系卡片">
+                <span class="图标">📱</span>
+                <div class="标签">微信</div>
+                <div class="值">15856911514</div>
+            </div>
+            <div class="联系卡片">
+                <span class="图标">📧</span>
+                <div class="标签">QQ 邮箱</div>
+                <div class="值"><a href="mailto:2446960448@qq.com">2446960448@qq.com</a></div>
+            </div>
+            <div class="联系卡片">
+                <span class="图标">💻</span>
+                <div class="标签">GitHub</div>
+                <div class="值"><a href="https://github.com/2446960448" target="_blank">github.com/2446960448</a></div>
+            </div>
+            <div class="联系卡片">
+                <span class="图标">🌐</span>
+                <div class="标签">位置</div>
+                <div class="值">中国</div>
+            </div>
+        </div>
+        <div class="社交区域">
+            <h2>社交媒体</h2>
+            <div class="社交链接">
+                <a href="https://github.com/2446960448" target="_blank" class="社交按钮">
+                    <span class="btn图标">💻</span> GitHub
+                </a>
+                <a href="mailto:2446960448@qq.com" class="社交按钮">
+                    <span class="btn图标">📧</span> 发邮件
+                </a>
+                <a href="message.html" class="社交按钮">
+                    <span class="btn图标">💬</span> 留言
+                </a>
+            </div>
+        </div>
+        <div class="留言提示">
+            <p>想说点什么？欢迎去留言板留下你的足迹！</p>
+            <a href="message.html">前往留言板 →</a>
+        </div>
+    </div>
+    <footer><p>© 2026 小秦的个人博客</p></footer>
+    <script>
+        function createParticles() { const c = document.getElementById('particles'); for (let i = 0; i < 30; i++) { const p = document.createElement('div'); p.className = 'particle'; p.style.left = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 15 + 's'; p.style.animationDuration = (Math.random() * 10 + 10) + 's'; c.appendChild(p); } }
+        createParticles();
+    </script>
+</body>
+</html>
