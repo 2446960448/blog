@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客文章 - 小秦的个人博客</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%); }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .particle { position: absolute; width: 2px; height: 2px; background: #00ffff; border-radius: 50%; animation: float 15s infinite; opacity: 0.5; }
+        @keyframes float { 0%, 100% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translateY(-100vh); opacity: 0; } }
+        nav { position: fixed; top: 0; width: 100%; padding: 15px 50px; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 255, 255, 0.1); z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00ffff, #0080ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #888; text-decoration: none; transition: all 0.3s; font-size: 14px; }
+        .nav-links a:hover { color: #00ffff; }
+        .container { max-width: 800px; margin: 0 auto; padding: 100px 20px 50px; }
+        h1 { font-size: 32px; color: #00ffff; margin-bottom: 30px; text-align: center; }
+        .搜索框 { position: relative; margin-bottom: 25px; }
+        .搜索框 input { width: 100%; padding: 14px 20px 14px 50px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 30px; color: #e0e0e0; font-size: 15px; }
+        .搜索框 input:focus { outline: none; border-color: #00ffff; }
+        .搜索框 .图标 { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 18px; }
+        .标签筛选 { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; justify-content: center; }
+        .筛选标签 { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px 20px; border-radius: 25px; font-size: 13px; color: #888; cursor: pointer; transition: all 0.3s; }
+        .筛选标签:hover, .筛选标签.active { background: rgba(0, 255, 255, 0.2); border-color: #00ffff; color: #00ffff; }
+        .blog-list { display: flex; flex-direction: column; gap: 20px; }
+        .blog-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 255, 0.1); border-radius: 12px; padding: 25px; transition: all 0.3s; }
+        .blog-card:hover { transform: translateX(5px); border-color: rgba(0, 255, 255, 0.3); box-shadow: 0 5px 30px rgba(0, 255, 255, 0.1); }
+        .blog-card h3 { color: #e0e0e0; font-size: 18px; margin-bottom: 10px; cursor: pointer; }
+        .blog-card h3:hover { color: #00ffff; }
+        .blog-meta { display: flex; gap: 20px; font-size: 12px; color: #666; margin-bottom: 12px; }
+        .blog-meta span { display: flex; align-items: center; gap: 5px; }
+        .blog-card p { color: #888; font-size: 14px; line-height: 1.8; }
+        .blog-tags { display: flex; gap: 8px; margin-top: 15px; }
+        .blog-tag { background: rgba(0, 255, 255, 0.05); padding: 4px 12px; border-radius: 4px; font-size: 11px; color: #00ffff; }
+        .弹窗背景 { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 200; justify-content: center; align-items: center; }
+        .弹窗背景.show { display: flex; }
+        .弹窗 { background: #1a1a2e; border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 15px; padding: 35px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .弹窗 h3 { color: #00ffff; margin-bottom: 20px; font-size: 22px; }
+        .弹窗 p { color: #888; line-height: 1.8; margin-bottom: 15px; }
+        .弹窗 h4 { color: #e0e0e0; margin: 20px 0 10px; }
+        .关闭弹窗 { float: right; background: none; border: none; color: #888; font-size: 28px; cursor: pointer; }
+        .关闭弹窗:hover { color: #00ffff; }
+        footer { text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid rgba(0, 255, 255, 0.1); color: #666; font-size: 13px; }
+        @media (max-width: 768px) { nav { padding: 12px 20px; } .container { padding: 100px 15px 30px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+    <nav>
+        <div class="logo">小秦</div>
+        <div class="nav-links">
+            <a href="index.html">首页</a>
+            <a href="blog.html">博客</a>
+            <a href="projects.html">项目</a>
+            <a href="message.html">留言</a>
+            <a href="contact.html">联系</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>📝 最新文章</h1>
+        <div class="搜索框">
+            <span class="图标">🔍</span>
+            <input type="text" id="搜索输入" placeholder="搜索文章..." oninput="搜索文章()">
+        </div>
+        <div class="标签筛选">
+            <span class="筛选标签 active" onclick="筛选文章('all', this)">全部</span>
+            <span class="筛选标签" onclick="筛选文章('技术', this)">技术</span>
+            <span class="筛选标签" onclick="筛选文章('生活', this)">生活</span>
+        </div>
+        <div class="blog-list" id="文章列表">
+            <div class="blog-card" data-tags="技术">
+                <h3 onclick="查看文章(0)">如何用 Python 实现自动化脚本</h3>
+                <div class="blog-meta"><span>📅 2026-06-04</span><span>👁️ 128 次阅读</span><span>💬 5 条评论</span></div>
+                <p>分享一些实用的 Python 自动化技巧，帮助你提高工作效率...</p>
+                <div class="blog-tags"><span class="blog-tag">Python</span><span class="blog-tag">自动化</span></div>
+            </div>
+            <div class="blog-card" data-tags="技术">
+                <h3 onclick="查看文章(1)">前端开发必备工具推荐</h3>
+                <div class="blog-meta"><span>📅 2026-06-03</span><span>👁️ 256 次阅读</span><span>💬 12 条评论</span></div>
+                <p>整理了一些我日常使用的前端开发工具，希望能对你有所帮助...</p>
+                <div class="blog-tags"><span class="blog-tag">前端</span><span class="blog-tag">工具</span></div>
+            </div>
+            <div class="blog-card" data-tags="生活">
+                <h3 onclick="查看文章(2)">我的网络冲浪日常</h3>
+                <div class="blog-meta"><span>📅 2026-06-02</span><span>👁️ 89 次阅读</span><span>💬 3 条评论</span></div>
+                <p>记录一下我平时在网上冲浪发现的有趣内容和网站...</p>
+                <div class="blog-tags"><span class="blog-tag">日常</span><span class="blog-tag">分享</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="弹窗背景" id="文章弹窗">
+        <div class="弹窗">
+            <button class="关闭弹窗" onclick="关闭弹窗()">&times;</button>
+            <h3 id="弹窗标题"></h3>
+            <div id="弹窗内容"></div>
+        </div>
+    </div>
+    <footer><p>© 2026 小秦的个人博客</p></footer>
+    <script>
+        function createParticles() { const c = document.getElementById('particles'); for (let i = 0; i < 30; i++) { const p = document.createElement('div'); p.className = 'particle'; p.style.left = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 15 + 's'; p.style.animationDuration = (Math.random() * 10 + 10) + 's'; c.appendChild(p); } }
+        createParticles();
+        function 搜索文章() { const k = document.getElementById('搜索输入').value.toLowerCase(); document.querySelectorAll('.blog-card').forEach(c => { const t = c.querySelector('h3').textContent.toLowerCase() + c.querySelector('p').textContent.toLowerCase(); c.style.display = t.includes(k) ? 'block' : 'none'; }); }
+        function 筛选文章(tag, el) { document.querySelectorAll('.筛选标签').forEach(e => e.classList.remove('active')); el.classList.add('active'); document.querySelectorAll('.blog-card').forEach(c => { c.style.display = (tag === 'all' || c.dataset.tags.includes(tag)) ? 'block' : 'none'; }); }
+        const 文章内容 = [
+            { title: "如何用 Python 实现自动化脚本", content: "<p>Python 是一门非常适合自动化的语言，下面分享一些实用的技巧：</p><h4>1. 文件批量处理</h4><p>使用 os 和 shutil 模块可以轻松实现文件的批量重命名、移动、复制等操作。</p><h4>2. 定时任务</h4><p>结合 schedule 库，可以实现定时执行任务的功能。</p><h4>3. 网页爬虫</h4><p>使用 requests 和 BeautifulSoup 可以实现简单的网页数据抓取。</p>" },
+            { title: "前端开发必备工具推荐", content: "<p>作为前端开发者，这些工具能大大提高你的开发效率：</p><h4>代码编辑器</h4><p>VS Code 是目前最流行的代码编辑器，拥有丰富的插件生态。</p><h4>版本控制</h4><p>Git 是必备的版本控制工具，配合 GitHub 使用更佳。</p>" },
+            { title: "我的网络冲浪日常", content: "<p>作为一个热爱网络冲浪的人，每天都会发现很多有趣的内容：</p><h4>有趣的网站</h4><p>分享一些我收藏的有趣网站，包括设计、技术、娱乐等类别。</p><h4>实用的工具</h4><p>发现了一些在线工具，可以帮助解决各种问题。</p>" }
+        ];
+        function 查看文章(i) { document.getElementById('弹窗标题').textContent = 文章内容[i].title; document.getElementById('弹窗内容').innerHTML = 文章内容[i].content; document.getElementById('文章弹窗').classList.add('show'); }
+        function 关闭弹窗() { document.getElementById('文章弹窗').classList.remove('show'); }
+        document.getElementById('文章弹窗').addEventListener('click', function(e) { if (e.target === this) 关闭弹窗(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') 关闭弹窗(); });
+    </script>
+</body>
+</html>
