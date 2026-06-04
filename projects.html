@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的项目 - 小秦的个人博客</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%); }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .particle { position: absolute; width: 2px; height: 2px; background: #00ffff; border-radius: 50%; animation: float 15s infinite; opacity: 0.5; }
+        @keyframes float { 0%, 100% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translateY(-100vh); opacity: 0; } }
+        nav { position: fixed; top: 0; width: 100%; padding: 15px 50px; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 255, 255, 0.1); z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00ffff, #0080ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #888; text-decoration: none; transition: all 0.3s; font-size: 14px; }
+        .nav-links a:hover { color: #00ffff; }
+        .container { max-width: 900px; margin: 0 auto; padding: 100px 20px 50px; }
+        h1 { font-size: 32px; color: #00ffff; margin-bottom: 40px; text-align: center; }
+        .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .project-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 255, 0.1); border-radius: 15px; padding: 30px; transition: all 0.3s; }
+        .project-card:hover { transform: translateY(-8px); border-color: rgba(0, 255, 255, 0.4); box-shadow: 0 15px 50px rgba(0, 255, 255, 0.15); }
+        .project-card .项目图标 { font-size: 50px; margin-bottom: 20px; }
+        .project-card h3 { color: #00ffff; font-size: 20px; margin-bottom: 12px; }
+        .project-card p { color: #888; font-size: 14px; line-height: 1.8; margin-bottom: 20px; }
+        .project-card .技术栈 { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .project-card .技术标签 { background: rgba(0, 255, 255, 0.1); padding: 4px 12px; border-radius: 4px; font-size: 11px; color: #00ffff; }
+        .project-link { color: #00ffff; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 5px; transition: all 0.3s; }
+        .project-link:hover { text-decoration: underline; transform: translateX(5px); }
+        footer { text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid rgba(0, 255, 255, 0.1); color: #666; font-size: 13px; }
+        @media (max-width: 768px) { nav { padding: 12px 20px; } .container { padding: 100px 15px 30px; } .projects { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+    <nav>
+        <div class="logo">小秦</div>
+        <div class="nav-links">
+            <a href="index.html">首页</a>
+            <a href="blog.html">博客</a>
+            <a href="projects.html">项目</a>
+            <a href="message.html">留言</a>
+            <a href="contact.html">联系</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>🚀 我的项目</h1>
+        <div class="projects">
+            <div class="project-card">
+                <div class="项目图标">⚡</div>
+                <h3>自动化工具集</h3>
+                <p>一套实用的自动化脚本工具，包含文件处理、数据清洗、定时任务等功能。帮助提高工作效率，减少重复劳动。</p>
+                <div class="技术栈">
+                    <span class="技术标签">Python</span>
+                    <span class="技术标签">Shell</span>
+                    <span class="技术标签">Cron</span>
+                </div>
+                <a href="#" class="project-link">查看详情 →</a>
+            </div>
+            <div class="project-card">
+                <div class="项目图标">🌐</div>
+                <h3>个人博客系统</h3>
+                <p>基于纯静态技术构建的个人博客，支持留言、搜索、标签筛选等功能。无需后端，部署简单。</p>
+                <div class="技术栈">
+                    <span class="技术标签">HTML</span>
+                    <span class="技术标签">CSS</span>
+                    <span class="技术标签">JavaScript</span>
+                </div>
+                <a href="index.html" class="project-link">访问博客 →</a>
+            </div>
+            <div class="project-card">
+                <div class="项目图标">🤖</div>
+                <h3>AI 助手集成</h3>
+                <p>将 AI 能力集成到日常工作流程中，实现智能问答、内容生成、数据分析等功能。</p>
+                <div class="技术栈">
+                    <span class="技术标签">AI</span>
+                    <span class="技术标签">API</span>
+                    <span class="技术标签">自动化</span>
+                </div>
+                <a href="#" class="project-link">查看详情 →</a>
+            </div>
+            <div class="project-card">
+                <div class="项目图标">📊</div>
+                <h3>数据可视化面板</h3>
+                <p>将复杂数据转化为直观的图表和仪表盘，帮助更好地理解和分析数据。</p>
+                <div class="技术栈">
+                    <span class="技术标签">ECharts</span>
+                    <span class="技术标签">D3.js</span>
+                    <span class="技术标签">Python</span>
+                </div>
+                <a href="#" class="project-link">查看详情 →</a>
+            </div>
+        </div>
+    </div>
+    <footer><p>© 2026 小秦的个人博客</p></footer>
+    <script>
+        function createParticles() { const c = document.getElementById('particles'); for (let i = 0; i < 30; i++) { const p = document.createElement('div'); p.className = 'particle'; p.style.left = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 15 + 's'; p.style.animationDuration = (Math.random() * 10 + 10) + 's'; c.appendChild(p); } }
+        createParticles();
+    </script>
+</body>
+</html>
