@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板 - 小秦的个人博客</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%); }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .particle { position: absolute; width: 2px; height: 2px; background: #00ffff; border-radius: 50%; animation: float 15s infinite; opacity: 0.5; }
+        @keyframes float { 0%, 100% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translateY(-100vh); opacity: 0; } }
+        nav { position: fixed; top: 0; width: 100%; padding: 15px 50px; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 255, 255, 0.1); z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00ffff, #0080ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #888; text-decoration: none; transition: all 0.3s; font-size: 14px; }
+        .nav-links a:hover { color: #00ffff; }
+        .container { max-width: 700px; margin: 0 auto; padding: 100px 20px 50px; }
+        h1 { font-size: 32px; color: #00ffff; margin-bottom: 30px; text-align: center; }
+        .留言表单 { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 255, 0.15); border-radius: 15px; padding: 30px; margin-bottom: 35px; }
+        .表单行 { margin-bottom: 18px; }
+        .表单行 label { display: block; color: #888; font-size: 13px; margin-bottom: 8px; }
+        .表单行 input, .表单行 textarea { width: 100%; padding: 12px 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 10px; color: #e0e0e0; font-size: 14px; transition: all 0.3s; }
+        .表单行 input:focus, .表单行 textarea:focus { outline: none; border-color: #00ffff; box-shadow: 0 0 15px rgba(0, 255, 255, 0.15); }
+        .表单行 textarea { height: 120px; resize: vertical; }
+        .提交按钮 { background: linear-gradient(135deg, #00ffff, #0080ff); color: #0a0a0a; border: none; padding: 14px 40px; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; transition: all 0.3s; width: 100%; }
+        .提交按钮:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3); }
+        .留言统计 { text-align: center; color: #888; font-size: 14px; margin-bottom: 25px; }
+        .留言统计 span { color: #00ffff; font-weight: bold; }
+        .留言列表 { display: flex; flex-direction: column; gap: 18px; }
+        .留言卡片 { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 255, 0.1); border-radius: 12px; padding: 22px; transition: all 0.3s; }
+        .留言卡片:hover { border-color: rgba(0, 255, 255, 0.3); }
+        .留言头部 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .留言用户头像 { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #00ffff, #0080ff); display: flex; align-items: center; justify-content: center; font-size: 18px; color: #0a0a0a; margin-right: 12px; }
+        .留言用户信息 { display: flex; align-items: center; }
+        .留言用户 { color: #00ffff; font-weight: bold; font-size: 15px; }
+        .留言时间 { color: #666; font-size: 12px; }
+        .留言内容 { color: #aaa; line-height: 1.8; font-size: 14px; }
+        .留言回复 { margin-top: 15px; padding: 15px; background: rgba(0, 255, 255, 0.05); border-left: 3px solid #00ffff; border-radius: 0 8px 8px 0; }
+        .留言回复 .回复标签 { color: #00ffff; font-size: 12px; margin-bottom: 5px; }
+        .留言回复 .回复内容 { color: #888; font-size: 13px; }
+        .空留言 { text-align: center; padding: 50px; color: #666; }
+        .空留言 .图标 { font-size: 50px; margin-bottom: 15px; }
+        footer { text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid rgba(0, 255, 255, 0.1); color: #666; font-size: 13px; }
+        @media (max-width: 768px) { nav { padding: 12px 20px; } .container { padding: 100px 15px 30px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+    <nav>
+        <div class="logo">小秦</div>
+        <div class="nav-links">
+            <a href="index.html">首页</a>
+            <a href="blog.html">博客</a>
+            <a href="projects.html">项目</a>
+            <a href="message.html">留言</a>
+            <a href="contact.html">联系</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>💬 留言板</h1>
+        <div class="留言表单">
+            <div class="表单行">
+                <label>昵称 *</label>
+                <input type="text" id="留言昵称" placeholder="输入你的昵称">
+            </div>
+            <div class="表单行">
+                <label>邮箱（可选）</label>
+                <input type="email" id="留言邮箱" placeholder="输入你的邮箱">
+            </div>
+            <div class="表单行">
+                <label>留言内容 *</label>
+                <textarea id="留言内容" placeholder="写下你想说的话..."></textarea>
+            </div>
+            <button class="提交按钮" onclick="提交留言()">✨ 发表留言</button>
+        </div>
+        <div class="留言统计">共 <span id="留言数">0</span> 条留言</div>
+        <div class="留言列表" id="留言列表"></div>
+    </div>
+    <footer><p>© 2026 小秦的个人博客</p></footer>
+    <script>
+        function createParticles() { const c = document.getElementById('particles'); for (let i = 0; i < 30; i++) { const p = document.createElement('div'); p.className = 'particle'; p.style.left = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 15 + 's'; p.style.animationDuration = (Math.random() * 10 + 10) + 's'; c.appendChild(p); } }
+        createParticles();
+        let 留言数据 = JSON.parse(localStorage.getItem('留言数据') || '[]');
+        function 加载留言() {
+            const container = document.getElementById('留言列表');
+            container.innerHTML = '';
+            document.getElementById('留言数').textContent = 留言数据.length;
+            if (留言数据.length === 0) { container.innerHTML = '<div class="空留言"><div class="图标">💬</div><p>暂无留言，快来抢沙发吧！</p></div>'; return; }
+            留言数据.forEach(msg => {
+                const card = document.createElement('div');
+                card.className = '留言卡片';
+                card.innerHTML = `
+                    <div class="留言头部">
+                        <div class="留言用户信息">
+                            <div class="留言用户头像">${msg.昵称[0]}</div>
+                            <span class="留言用户">${msg.昵称}</span>
+                        </div>
+                        <span class="留言时间">${msg.时间}</span>
+                    </div>
+                    <div class="留言内容">${msg.内容}</div>
+                    ${msg.回复 ? `<div class="留言回复"><div class="回复标签">💬 小秦回复：</div><div class="回复内容">${msg.回复}</div></div>` : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+        function 提交留言() {
+            const 昵称 = document.getElementById('留言昵称').value.trim();
+            const 内容 = document.getElementById('留言内容').value.trim();
+            if (!昵称 || !内容) { alert('请填写昵称和留言内容！'); return; }
+            const now = new Date();
+            const 时间 = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+            留言数据.unshift({ 昵称, 邮箱: document.getElementById('留言邮箱').value.trim(), 内容, 时间, 回复: null });
+            localStorage.setItem('留言数据', JSON.stringify(留言数据));
+            document.getElementById('留言昵称').value = '';
+            document.getElementById('留言邮箱').value = '';
+            document.getElementById('留言内容').value = '';
+            加载留言();
+            alert('留言成功！');
+        }
+        加载留言();
+    </script>
+</body>
+</html>
