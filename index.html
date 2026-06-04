@@ -9,7 +9,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none;
         }
 
         body {
@@ -20,102 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* 自定义光标 */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #00ffff;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease, opacity 0.15s ease;
-            mix-blend-mode: difference;
-        }
-
-        .cursor-dot {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: #00ffff;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-        }
-
-        .cursor-glow {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-        }
-
-        /* 鼠标拖尾 */
-        .trail {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background: #00ffff;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9997;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        /* 点击爆炸效果 */
-        .click-explosion {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9996;
-        }
-
-        .click-particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #00ffff;
-            border-radius: 50%;
-            animation: explode 0.6s ease-out forwards;
-        }
-
-        @keyframes explode {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-        }
-
-        /* 波纹效果 */
-        .ripple {
-            position: fixed;
-            border: 2px solid rgba(0, 255, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9995;
-            animation: rippleAnim 0.8s ease-out forwards;
-        }
-
-        @keyframes rippleAnim {
-            0% { width: 0; height: 0; opacity: 1; }
-            100% { width: 150px; height: 150px; opacity: 0; transform: translate(-75px, -75px); }
-        }
-
-        /* 连线效果画布 */
-        #connectCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9994;
-        }
-
-        /* 背景动画 */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -142,7 +45,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* 粒子效果 */
         .particles {
             position: fixed;
             top: 0;
@@ -170,13 +72,12 @@
             100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
 
-        /* 导航栏 */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 50px;
-            background: rgba(10, 10, 10, 0.9);
+            padding: 15px 50px;
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0, 255, 255, 0.1);
             z-index: 100;
@@ -196,7 +97,7 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
 
         .nav-links a {
@@ -212,36 +113,15 @@
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
-        /* 主要内容 */
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 120px 20px 50px;
-        }
-
-        /* 头部区域 */
-        .hero {
+            padding: 100px 20px 50px;
             text-align: center;
-            padding: 80px 0;
-            position: relative;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        .hero {
+            padding: 60px 0;
         }
 
         .avatar {
@@ -255,15 +135,8 @@
             justify-content: center;
             font-size: 60px;
             color: #0a0a0a;
-            position: relative;
-            z-index: 1;
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
             animation: glow 2s ease-in-out infinite alternate;
-            transition: transform 0.3s ease;
-        }
-
-        .avatar:hover {
-            transform: scale(1.1) rotate(10deg);
         }
 
         @keyframes glow {
@@ -271,7 +144,7 @@
             to { box-shadow: 0 0 50px rgba(0, 255, 255, 0.5); }
         }
 
-        .hero h1 {
+        h1 {
             font-size: 48px;
             margin-bottom: 15px;
             background: linear-gradient(90deg, #00ffff, #0080ff, #00ffff);
@@ -287,144 +160,18 @@
             100% { background-position: 200% center; }
         }
 
-        .hero .subtitle {
+        .subtitle {
             font-size: 20px;
             color: #00ffff;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+            margin-bottom: 15px;
         }
 
-        .hero .intro {
+        .intro {
             font-size: 18px;
             color: #888;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
+            margin-bottom: 30px;
         }
 
-        /* 卡片样式 */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 40px 30px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.05), transparent);
-            transition: left 0.5s;
-        }
-
-        .card:hover::before {
-            left: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 255, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.1);
-        }
-
-        .card-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-            transition: transform 0.3s;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.2) rotate(-10deg);
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: #00ffff;
-        }
-
-        .card p {
-            color: #888;
-            line-height: 1.6;
-        }
-
-        /* 联系信息 */
-        .contact-section {
-            margin-top: 80px;
-            text-align: center;
-        }
-
-        .contact-section h2 {
-            font-size: 32px;
-            margin-bottom: 40px;
-            color: #00ffff;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 30px;
-            transition: all 0.3s;
-        }
-
-        .contact-item:hover {
-            border-color: rgba(0, 255, 255, 0.3);
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
-        }
-
-        .contact-item .icon {
-            font-size: 30px;
-            margin-bottom: 15px;
-            transition: transform 0.3s;
-        }
-
-        .contact-item:hover .icon {
-            transform: scale(1.3);
-            animation: bounce 0.5s ease;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: scale(1.3); }
-            50% { transform: scale(1.5); }
-        }
-
-        .contact-item .label {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .contact-item .value {
-            color: #e0e0e0;
-            font-size: 16px;
-            word-break: break-all;
-        }
-
-        /* 打字效果 */
         .typing-effect {
             display: inline-block;
             border-right: 2px solid #00ffff;
@@ -437,44 +184,157 @@
             50% { border-color: transparent; }
         }
 
-        /* 页脚 */
-        footer {
-            text-align: center;
-            padding: 40px;
-            margin-top: 80px;
-            border-top: 1px solid rgba(0, 255, 255, 0.1);
-            color: #666;
-            font-size: 14px;
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
         }
 
-        /* 响应式 */
+        .skill-tag {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            color: #00ffff;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00ffff;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #00ff00;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .功能按钮区域 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .功能按钮 {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .功能按钮:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 255, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.15);
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .功能按钮 .图标 {
+            font-size: 40px;
+        }
+
+        .功能按钮 .标题 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00ffff;
+        }
+
+        .功能按钮 .描述 {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .访客计数 {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            color: #00ffff;
+            margin-top: 30px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            color: #666;
+            font-size: 13px;
+        }
+
         @media (max-width: 768px) {
             nav {
-                padding: 15px 20px;
+                padding: 12px 20px;
+                flex-direction: column;
+                gap: 10px;
             }
 
-            .hero h1 {
+            h1 {
                 font-size: 36px;
             }
 
             .container {
-                padding: 100px 15px 30px;
+                padding: 120px 15px 30px;
             }
 
-            .cards {
-                grid-template-columns: 1fr;
+            .stats {
+                gap: 30px;
             }
 
-            .cursor, .cursor-dot, .cursor-glow, .trail {
-                display: none;
-            }
-
-            * {
-                cursor: auto;
+            .功能按钮区域 {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
-        /* 滚动条 */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -487,132 +347,78 @@
             background: rgba(0, 255, 255, 0.3);
             border-radius: 4px;
         }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 255, 255, 0.5);
-        }
-
-        /* 状态指示器 */
-        .status {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #00ff00;
-            border-radius: 50%;
-            margin-right: 8px;
-            animation: statusPulse 2s infinite;
-        }
-
-        @keyframes statusPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* 技能标签 */
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-
-        .skill-tag {
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #00ffff;
-            transition: all 0.3s;
-        }
-
-        .skill-tag:hover {
-            background: rgba(0, 255, 255, 0.2);
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-        }
-
-        /* 磁性效果 */
-        .magnetic {
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        /* 鼠标跟随文字颜色变化 */
-        .gradient-text-hover {
-            transition: all 0.3s;
-        }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
-    
     <div class="particles" id="particles"></div>
-    
-    <!-- 自定义光标 -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
-    
-    <!-- 连线画布 -->
-    <canvas id="connectCanvas"></canvas>
 
     <nav>
-        <div class="logo magnetic">小秦</div>
+        <div class="logo">小秦</div>
         <div class="nav-links">
-            <a href="#home" class="magnetic">首页</a>
-            <a href="#about" class="magnetic">关于</a>
-            <a href="#contact" class="magnetic">联系</a>
+            <a href="index.html">首页</a>
+            <a href="blog.html">博客</a>
+            <a href="projects.html">项目</a>
+            <a href="message.html">留言</a>
+            <a href="contact.html">联系</a>
         </div>
     </nav>
 
     <div class="container">
-        <section class="hero" id="home">
-            <div class="avatar magnetic">秦</div>
-            <h1 class="gradient-text-hover">小秦</h1>
+        <section class="hero">
+            <div class="avatar">秦</div>
+            <h1>小秦</h1>
             <p class="subtitle">技术专员</p>
-            <p class="intro">
-                <span class="typing-effect">我就是小秦</span>
-            </p>
+            <p class="intro"><span class="typing-effect">我就是小秦</span></p>
+            
             <div class="skills">
-                <span class="skill-tag magnetic">网络冲浪</span>
-                <span class="skill-tag magnetic">技术探索</span>
-                <span class="skill-tag magnetic">问题解决</span>
+                <span class="skill-tag">网络冲浪</span>
+                <span class="skill-tag">技术探索</span>
+                <span class="skill-tag">问题解决</span>
+                <span class="skill-tag">前端开发</span>
+                <span class="skill-tag">Python</span>
             </div>
-        </section>
 
-        <section class="cards" id="about">
-            <div class="card magnetic">
-                <div class="card-icon">👨‍💻</div>
-                <h3>关于我</h3>
-                <p>我是小秦，一名技术专员。热爱技术，喜欢探索新事物，在网络世界中寻找灵感和解决方案。</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">文章</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">项目</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number"><span class="状态" style="display:inline-block;width:10px;height:10px;background:#00ff00;border-radius:50%;animation:statusPulse 2s infinite;"></span> 在线</span>
+                    <span class="stat-label">状态</span>
+                </div>
             </div>
-            <div class="card magnetic">
-                <div class="card-icon">🌐</div>
-                <h3>兴趣爱好</h3>
-                <p>网络冲浪是我最大的爱好。在信息的海洋中遨游，发现有趣的技术和创意，不断学习和成长。</p>
-            </div>
-            <div class="card magnetic">
-                <div class="card-icon">🚀</div>
-                <h3>我的状态</h3>
-                <p><span class="status"></span>在线中</p>
-                <p style="margin-top: 15px; color: #888;">随时准备迎接新的挑战和技术探索！</p>
-            </div>
-        </section>
 
-        <section class="contact-section" id="contact">
-            <h2>联系我</h2>
-            <div class="contact-grid">
-                <div class="contact-item magnetic">
-                    <div class="icon">📱</div>
-                    <div class="label">微信</div>
-                    <div class="value">15856911514</div>
-                </div>
-                <div class="contact-item magnetic">
-                    <div class="icon">📧</div>
-                    <div class="label">邮箱</div>
-                    <div class="value">2446960448@qq.com</div>
-                </div>
+            <div class="功能按钮区域">
+                <a href="blog.html" class="功能按钮">
+                    <span class="图标">📝</span>
+                    <span class="标题">博客文章</span>
+                    <span class="描述">分享技术与生活</span>
+                </a>
+                <a href="projects.html" class="功能按钮">
+                    <span class="图标">🚀</span>
+                    <span class="标题">我的项目</span>
+                    <span class="description">展示开源作品</span>
+                </a>
+                <a href="message.html" class="功能按钮">
+                    <span class="图标">💬</span>
+                    <span class="标题">留言板</span>
+                    <span class="描述">欢迎留言交流</span>
+                </a>
+                <a href="contact.html" class="功能按钮">
+                    <span class="图标">📮</span>
+                    <span class="标题">联系我</span>
+                    <span class="描述">随时保持联系</span>
+                </a>
+            </div>
+
+            <div class="访客计数">
+                👁️ 访客: <span id="访客数">0</span>
             </div>
         </section>
     </div>
@@ -622,246 +428,6 @@
     </footer>
 
     <script>
-        // ========== 自定义光标 ==========
-        const cursor = document.getElementById('cursor');
-        const cursorDot = document.getElementById('cursorDot');
-        const cursorGlow = document.getElementById('cursorGlow');
-        
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // 光点直接跟随
-            cursorDot.style.left = mouseX - 3 + 'px';
-            cursorDot.style.top = mouseY - 3 + 'px';
-            
-            // 光晕跟随
-            cursorGlow.style.left = mouseX + 'px';
-            cursorGlow.style.top = mouseY + 'px';
-            
-            // 添加拖尾粒子
-            createTrailParticle(mouseX, mouseY);
-        });
-
-        // 光标平滑跟随
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.15;
-            cursorY += (mouseY - cursorY) * 0.15;
-            
-            cursor.style.left = cursorX - 10 + 'px';
-            cursor.style.top = cursorY - 10 + 'px';
-            
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // 悬停效果
-        const hoverElements = document.querySelectorAll('a, button, .card, .contact-item, .skill-tag, .avatar, .magnetic');
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(2)';
-                cursor.style.borderColor = '#ff00ff';
-                cursorDot.style.background = '#ff00ff';
-                cursorDot.style.boxShadow = '0 0 20px #ff00ff';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursor.style.borderColor = '#00ffff';
-                cursorDot.style.background = '#00ffff';
-                cursorDot.style.boxShadow = '0 0 10px #00ffff, 0 0 20px #00ffff';
-            });
-        });
-
-        // ========== 鼠标拖尾 ==========
-        const trailParticles = [];
-        const maxTrail = 20;
-
-        function createTrailParticle(x, y) {
-            const particle = document.createElement('div');
-            particle.className = 'trail';
-            particle.style.left = x - 4 + 'px';
-            particle.style.top = y - 4 + 'px';
-            particle.style.opacity = '0.6';
-            particle.style.background = `hsl(${Date.now() % 360}, 100%, 50%)`;
-            document.body.appendChild(particle);
-            
-            trailParticles.push({
-                element: particle,
-                life: 1
-            });
-            
-            if (trailParticles.length > maxTrail) {
-                const old = trailParticles.shift();
-                old.element.remove();
-            }
-            
-            // 淡出动画
-            setTimeout(() => {
-                particle.style.opacity = '0';
-                particle.style.transform = 'scale(0)';
-                setTimeout(() => particle.remove(), 300);
-            }, 100);
-        }
-
-        // ========== 点击爆炸效果 ==========
-        document.addEventListener('click', (e) => {
-            createExplosion(e.clientX, e.clientY);
-            createRipple(e.clientX, e.clientY);
-        });
-
-        function createExplosion(x, y) {
-            const explosion = document.createElement('div');
-            explosion.className = 'click-explosion';
-            explosion.style.left = x + 'px';
-            explosion.style.top = y + 'px';
-            
-            const colors = ['#00ffff', '#ff00ff', '#ffff00', '#00ff00', '#ff6600'];
-            
-            for (let i = 0; i < 12; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'click-particle';
-                const angle = (Math.PI * 2 * i) / 12;
-                const distance = 50 + Math.random() * 50;
-                const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance;
-                particle.style.setProperty('--tx', tx + 'px');
-                particle.style.setProperty('--ty', ty + 'px');
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                explosion.appendChild(particle);
-            }
-            
-            document.body.appendChild(explosion);
-            setTimeout(() => explosion.remove(), 600);
-        }
-
-        function createRipple(x, y) {
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            document.body.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 800);
-        }
-
-        // ========== 磁性效果 ==========
-        document.querySelectorAll('.magnetic').forEach(el => {
-            el.addEventListener('mousemove', (e) => {
-                const rect = el.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                el.style.transform = 'translate(0, 0)';
-            });
-        });
-
-        // ========== 粒子连线效果 ==========
-        const canvas = document.getElementById('connectCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class FloatingParticle {
-            constructor() {
-                this.reset();
-            }
-            
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 2 + 1;
-                this.opacity = Math.random() * 0.5 + 0.2;
-            }
-            
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                
-                // 鼠标吸引效果
-                const dx = mouseX - this.x;
-                const dy = mouseY - this.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                if (dist < 200) {
-                    this.vx += dx * 0.0001;
-                    this.vy += dy * 0.0001;
-                }
-                
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-            
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(0, 255, 255, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-
-        const floatingParticles = [];
-        for (let i = 0; i < 50; i++) {
-            floatingParticles.push(new FloatingParticle());
-        }
-
-        function drawConnections() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // 粒子之间连线
-            for (let i = 0; i < floatingParticles.length; i++) {
-                floatingParticles[i].update();
-                floatingParticles[i].draw();
-                
-                for (let j = i + 1; j < floatingParticles.length; j++) {
-                    const dx = floatingParticles[i].x - floatingParticles[j].x;
-                    const dy = floatingParticles[i].y - floatingParticles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(floatingParticles[i].x, floatingParticles[i].y);
-                        ctx.lineTo(floatingParticles[j].x, floatingParticles[j].y);
-                        ctx.strokeStyle = `rgba(0, 255, 255, ${0.2 * (1 - dist / 150)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-                
-                // 鼠标与粒子连线
-                const dx = mouseX - floatingParticles[i].x;
-                const dy = mouseY - floatingParticles[i].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                if (dist < 200) {
-                    ctx.beginPath();
-                    ctx.moveTo(mouseX, mouseY);
-                    ctx.lineTo(floatingParticles[i].x, floatingParticles[i].y);
-                    const gradient = ctx.createLinearGradient(mouseX, mouseY, floatingParticles[i].x, floatingParticles[i].y);
-                    gradient.addColorStop(0, `rgba(255, 0, 255, ${0.5 * (1 - dist / 200)})`);
-                    gradient.addColorStop(1, `rgba(0, 255, 255, ${0.3 * (1 - dist / 200)})`);
-                    ctx.strokeStyle = gradient;
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                }
-            }
-            
-            requestAnimationFrame(drawConnections);
-        }
-        drawConnections();
-
-        // ========== 创建背景粒子 ==========
         function createParticles() {
             const container = document.getElementById('particles');
             const particleCount = 30;
@@ -875,45 +441,12 @@
                 container.appendChild(particle);
             }
         }
-
-        // ========== 平滑滚动 ==========
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // ========== 卡片动画 ==========
-        const cards = document.querySelectorAll('.card');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        cards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.5s ease-out';
-            observer.observe(card);
-        });
-
-        // ========== 鼠标视差效果 ==========
-        document.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-            
-            document.querySelector('.hero').style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-
-        // ========== 初始化 ==========
         createParticles();
+
+        let count = localStorage.getItem('访客数') || 0;
+        count = parseInt(count) + 1;
+        localStorage.setItem('访客数', count);
+        document.getElementById('访客数').textContent = count;
     </script>
 </body>
 </html>
